@@ -2,6 +2,7 @@ import os
 import magic
 import collections
 import shutil
+from time import sleep
 from colorama import Fore, Style
 from rich.table import Table
 from rich.console import Console
@@ -68,9 +69,19 @@ mov_list = file_type_and_name[input_type]
 dir = folder_exits_check(dest_dir,input_type)
 
 def move_func(source_dir,dir,item_list):
+    console = Console()
 
-    for item in item_list:
-        print(item)
-        item_source_path = source_dir + item
-        item_dest_path = str(dir)+ "/" + item
-        move_file = shutil.move(item_source_path,item_dest_path)
+    # for item in item_list:
+        # item_source_path = source_dir + item
+        # item_dest_path = str(dir)+ "/" + item
+        # shutil.move(item_source_path,item_dest_path)
+
+    tasks = [f"Moving {item}" for item in item_list]
+
+    with console.status("[bold white]Moving ... ",spinner='aesthetic') as status:
+        while tasks:
+            task = tasks.pop(0)
+            sleep(1)
+            console.log(f"{task} Complete")
+
+move_func(source_dir,dir,mov_list)
