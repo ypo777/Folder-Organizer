@@ -71,10 +71,10 @@ dir = folder_exits_check(dest_dir,input_type)
 def move_func(source_dir,dir,item_list):
     console = Console()
 
-    # for item in item_list:
-        # item_source_path = source_dir + item
-        # item_dest_path = str(dir)+ "/" + item
-        # shutil.move(item_source_path,item_dest_path)
+    for item in item_list:
+        item_source_path = source_dir + item
+        item_dest_path = str(dir)+ "/" + item
+        shutil.move(item_source_path,item_dest_path)
 
     tasks = [f"Moving {item}" for item in item_list]
 
