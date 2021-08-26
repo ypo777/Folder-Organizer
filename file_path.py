@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import magic
 import collections
@@ -6,6 +7,11 @@ from time import sleep
 from colorama import Fore, Style
 from rich.table import Table
 from rich.console import Console
+
+os.system("title Folder Organizer By YanPaingOo")
+os.system('cls' if os.name == 'nt' else 'clear')
+
+console = Console()
 
 dest_dir = "/Users/sherrinford/Documents/"
 source_dir = "/Users/sherrinford/Downloads/"
@@ -40,7 +46,6 @@ def store_data(file_type,file_name):
         file_type_and_name[file_type].append(file_name)
 
 def show_as_table(data):
-    console = Console()
     table = Table(title="All Files and Directory in Downloads",show_header=True,header_style="bold green")
     t_header = ['No', 'File Name', 'Type']
     for num in t_header:
@@ -69,7 +74,6 @@ mov_list = file_type_and_name[input_type]
 dir = folder_exits_check(dest_dir,input_type)
 
 def move_func(source_dir,dir,item_list):
-    console = Console()
 
     for item in item_list:
         item_source_path = source_dir + item
@@ -84,4 +88,5 @@ def move_func(source_dir,dir,item_list):
             sleep(1)
             console.log(f"{task} Complete")
 
-move_func(source_dir,dir,mov_list)
+# move_func(source_dir,dir,mov_list)
+

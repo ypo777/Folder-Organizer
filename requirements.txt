@@ -1,0 +1,6 @@
+colorama==0.4.4
+commonmark==0.9.1
+Pygments==2.10.0
+python-magic==0.4.24
+rich==10.7.0
+tabulate==0.8.9
