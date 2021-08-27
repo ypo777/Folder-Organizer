@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import magic
-import collections
+# import collections
 import shutil
 from time import sleep
 from colorama import Fore, Style
@@ -15,8 +15,8 @@ console = Console()
 
 dest_dir = "/Users/sherrinford/Documents/"
 source_dir = "/Users/sherrinford/Downloads/"
-file_type_and_name = collections.defaultdict(list)
-file_type_and_name = { "application": [] ,"Directory": [],"video":[]}
+# file_type_and_name = collections.defaultdict(list)
+file_type_and_name = {"Directory": []}
 
 def show_file_and_directory(source_dir):
 
@@ -63,21 +63,27 @@ def folder_exits_check(dest_dir,input_type):
         return dest_dir + input_type
     else:
         print("{} NOT EXIST: {}{}".format(Fore.RED,input_type,Style.RESET_ALL))
+        tasks =  [f"Creating Folder {input_type}"]
 
+        with console.status("[bold green]Creating Folder") as status:
+            while tasks:
+                task = tasks.pop(0)
+                sleep(1)
+                console.log(f"{task} Complete")
 
+        os.mkdir(dest_dir + input_type)
+        return dest_dir + input_type
 
-show_file_and_directory(source_dir)
-print("Eg: image  or For all Enter All")
-input_type = input("Choose File Type: ")
-mov_list = file_type_and_name[input_type]
+def file_type_check(input_type):
 
-dir = folder_exits_check(dest_dir,input_type)
+    if input_type not in file_type_and_name:
+        print("Your selected type is not available")
 
-def move_func(source_dir,dir,item_list):
+def move_func(source_dir,move_dir,item_list):
 
     for item in item_list:
         item_source_path = source_dir + item
-        item_dest_path = str(dir)+ "/" + item
+        item_dest_path = str(move_dir)+ "/" + item
         shutil.move(item_source_path,item_dest_path)
 
     tasks = [f"Moving {item}" for item in item_list]
@@ -88,5 +94,27 @@ def move_func(source_dir,dir,item_list):
             sleep(1)
             console.log(f"{task} Complete")
 
-# move_func(source_dir,dir,mov_list)
+def userinput():
+    input_type = input("Choose File Type: ")
+    return input_type
+
+def input_type_check(input_type):
+    if input_type == "all":
+        for key,values in file_type_and_name.items():
+            move_dir = folder_exits_check(dest_dir,key)
+            move_func(source_dir,move_dir,values)
+
+
+
+show_file_and_directory(source_dir)
+print("Eg: image  or For all Enter All")
+
+result = userinput()
+input_type_check(result)
+# file_list,file_type = userinput()
+# print(file_list)
+# print(file_type)
+# move_dir = folder_exits_check(dest_dir,file_type)
+
+# move_func(source_dir,dir,file_list)
 
