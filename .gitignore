@@ -7,6 +7,7 @@ __pycache__/
 .DS_Store
 folder/
 test.py
+user.py
 # C extensions
 *.so
 

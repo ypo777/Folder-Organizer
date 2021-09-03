@@ -4,6 +4,8 @@ import magic
 # import collections
 import shutil
 from time import sleep
+from os import system,name
+from time import sleep
 from colorama import Fore, Style
 from rich.table import Table
 from rich.console import Console
@@ -15,8 +17,16 @@ console = Console()
 
 dest_dir = "/Users/sherrinford/Documents/"
 source_dir = "/Users/sherrinford/Downloads/"
-# file_type_and_name = collections.defaultdict(list)
 file_type_and_name = {"Directory": []}
+
+def mode_selection():
+    selection_list = ['a','m','A','M']
+    user_selection = userinput(selection_list)
+    print(user_selection)
+    if user_selection == "a" or user_selection == "A":
+        print("Auto Mode Selected")
+    else:
+        print("Manual Selected")
 
 def show_file_and_directory(source_dir):
 
@@ -94,8 +104,19 @@ def move_func(source_dir,move_dir,item_list):
             sleep(1)
             console.log(f"{task} Complete")
 
-def userinput():
-    input_type = input("Choose File Type: ")
+def screen_clean():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+
+def userinput(list_for_input):
+
+    input_type = input("Enter your choice : ")
+
+    while input_type not in list_for_input:
+        print("Invalid input {}".format(input_type))
+        input_type = input("Enter your choice : ")
     return input_type
 
 def input_type_check(input_type):
@@ -109,8 +130,6 @@ def input_type_check(input_type):
 show_file_and_directory(source_dir)
 print("Eg: image  or For all Enter All")
 
-result = userinput()
-input_type_check(result)
 # file_list,file_type = userinput()
 # print(file_list)
 # print(file_type)
@@ -118,3 +137,4 @@ input_type_check(result)
 
 # move_func(source_dir,dir,file_list)
 
+mode_selection()
