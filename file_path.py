@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 import magic
-# import collections
 import shutil
 from time import sleep
 from os import system,name
@@ -25,8 +24,10 @@ def mode_selection():
     print(user_selection)
     if user_selection == "a" or user_selection == "A":
         print("Auto Mode Selected")
+        auto_mode()
     else:
         print("Manual Selected")
+        manual_mode()
 
 def show_file_and_directory(source_dir):
 
@@ -84,10 +85,6 @@ def folder_exits_check(dest_dir,input_type):
         os.mkdir(dest_dir + input_type)
         return dest_dir + input_type
 
-def file_type_check(input_type):
-
-    if input_type not in file_type_and_name:
-        print("Your selected type is not available")
 
 def move_func(source_dir,move_dir,item_list):
 
@@ -119,22 +116,28 @@ def userinput(list_for_input):
         input_type = input("Enter your choice : ")
     return input_type
 
-def input_type_check(input_type):
-    if input_type == "all":
-        for key,values in file_type_and_name.items():
-            move_dir = folder_exits_check(dest_dir,key)
-            move_func(source_dir,move_dir,values)
+def auto_mode():
+    show_file_and_directory(source_dir)
+    for key,values in file_type_and_name.items():
+        move_dir = folder_exits_check(dest_dir,key)
+        move_func(source_dir,move_dir,values)
 
+def manual_mode():
+    show_file_and_directory(source_dir)
+    print("Eg: image ")
+    file_type_list = file_type_and_name.keys()
+    user_selection  = userinput(file_type_list)
 
+    move_dir = folder_exits_check(dest_dir,user_selection)
+    file_list = get_file_list(user_selection)
+    move_func(source_dir,move_dir,file_list)
 
-show_file_and_directory(source_dir)
-print("Eg: image  or For all Enter All")
+def get_file_list(file_type):
+    file_list = None
+    for key,values in file_type_and_name.items():
+        if key == file_type:
+            file_list = values
+    return file_list
 
-# file_list,file_type = userinput()
-# print(file_list)
-# print(file_type)
-# move_dir = folder_exits_check(dest_dir,file_type)
-
-# move_func(source_dir,dir,file_list)
 
 mode_selection()
