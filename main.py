@@ -122,6 +122,8 @@ def userinput(list_for_input):
 def auto_mode():
     result = show_file_and_directory(source_dir)
     if result:
+        screen_clean()
+        show_as_table(result)
         for key,values in file_type_and_name.items():
             move_dir = folder_exits_check(dest_dir,key)
             move_func(source_dir,move_dir,values)
@@ -132,6 +134,7 @@ def auto_mode():
 def manual_mode():
     result =   show_file_and_directory(source_dir)
     if result:
+        screen_clean()
         show_as_table(result)
         print("Eg: image ")
         file_type_list = file_type_and_name.keys()
