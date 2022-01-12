@@ -50,7 +50,7 @@ def show_file_and_directory(source_dir):
                 file_type_and_name["Directory"].append(str(file))
                 count +=1
 
-    show_as_table(data)
+    return data
 
 def store_data(file_type,file_name):
     if file_type not in file_type_and_name:
@@ -120,20 +120,28 @@ def userinput(list_for_input):
     return input_type
 
 def auto_mode():
-    show_file_and_directory(source_dir)
-    for key,values in file_type_and_name.items():
-        move_dir = folder_exits_check(dest_dir,key)
-        move_func(source_dir,move_dir,values)
+    result = show_file_and_directory(source_dir)
+    if result:
+        for key,values in file_type_and_name.items():
+            move_dir = folder_exits_check(dest_dir,key)
+            move_func(source_dir,move_dir,values)
+    else:
+        print("There is no files or folder in "+source_dir)
+
 
 def manual_mode():
-    show_file_and_directory(source_dir)
-    print("Eg: image ")
-    file_type_list = file_type_and_name.keys()
-    user_selection  = userinput(file_type_list)
+    result =   show_file_and_directory(source_dir)
+    if result:
+        show_as_table(result)
+        print("Eg: image ")
+        file_type_list = file_type_and_name.keys()
+        user_selection  = userinput(file_type_list)
 
-    move_dir = folder_exits_check(dest_dir,user_selection)
-    file_list = get_file_list(user_selection)
-    move_func(source_dir,move_dir,file_list)
+        move_dir = folder_exits_check(dest_dir,user_selection)
+        file_list = get_file_list(user_selection)
+        move_func(source_dir,move_dir,file_list)
+    else:
+        print("There is no files or folder in "+source_dir)
 
 def get_file_list(file_type):
     file_list = None
