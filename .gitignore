@@ -5,7 +5,7 @@ __pycache__/
 
 #MacOS
 .DS_Store
-folder/
+automation-folder/
 test.py
 user.py
 # C extensions

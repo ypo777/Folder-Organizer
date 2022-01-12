@@ -14,15 +14,18 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 console = Console()
 
-dest_dir = "/Users/sherrinford/Documents/"
-source_dir = "/Users/sherrinford/Downloads/"
+home_dir    =   os.path.expanduser('~')
+dest_dir = home_dir + "/Documents/"
+source_dir = home_dir + "/Downloads/"
 file_type_and_name = {"Directory": []}
 
 def mode_selection():
-    selection_list = ['a','m','A','M']
+    selection_list = ["1","2"]
+    print("1.Auto Mode")
+    print("2.Manual Mode")
     user_selection = userinput(selection_list)
     print(user_selection)
-    if user_selection == "a" or user_selection == "A":
+    if user_selection == "1":
         print("Auto Mode Selected")
         auto_mode()
     else:
