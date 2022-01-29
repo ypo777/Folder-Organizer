@@ -1,7 +1,10 @@
 ## Move Files From Downloads to Documents Depends on FileType
 
-#### Requirements
-- Rich Library
+Install requirements: 
+```
+pip install -r requirements.txt
+```
+
 
 #### How it will works
 - Move Files according to Type
