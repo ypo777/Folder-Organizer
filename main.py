@@ -9,7 +9,7 @@ from colorama import Fore, Style
 from rich.table import Table
 from rich.console import Console
 
-os.system("title Folder Organizer By YanPaingOo")
+
 os.system('cls' if os.name == 'nt' else 'clear')
 
 console = Console()
@@ -19,18 +19,20 @@ dest_dir = home_dir + "/Documents/"
 source_dir = home_dir + "/Downloads/"
 file_type_and_name = {"Directory": []}
 
+
 def mode_selection():
     selection_list = ["1","2"]
-    print("1.Auto Mode")
-    print("2.Manual Mode")
+    console.print("1.Auto Mode", style="bold green")
+    console.print("2.Manual Mode", style="bold red")
     user_selection = userinput(selection_list)
     print(user_selection)
     if user_selection == "1":
-        print("Auto Mode Selected")
+        console.print("Auto Mode Selected", style="bold green")
         auto_mode()
     else:
-        print("Manual Selected")
+        console.print("Manual Selected", style="bold red")
         manual_mode()
+
 
 def show_file_and_directory(source_dir):
 
@@ -52,12 +54,14 @@ def show_file_and_directory(source_dir):
 
     return data
 
+
 def store_data(file_type,file_name):
     if file_type not in file_type_and_name:
         file_type_and_name[file_type] = []
         file_type_and_name[file_type].append(file_name)
     else:
         file_type_and_name[file_type].append(file_name)
+
 
 def show_as_table(data):
     table = Table(title="All Files and Directory in Downloads",show_header=True,header_style="bold green")
@@ -66,8 +70,13 @@ def show_as_table(data):
         table.add_column(num)
 
     for d in data:
-        table.add_row(str(d[0]),str(d[1]),str(d[2]).rsplit('/',1)[0])
+        table.add_row(
+            "[dim]" + str(d[0])+ "[/dim]",
+            str(d[1]),
+            "[bold]" + str(d[2]).rsplit('/',1)[0] + "[/bold]"
+            )
     console.print(table)
+
 
 def folder_exits_check(dest_dir,input_type):
     input_type = input_type.capitalize()
@@ -104,11 +113,13 @@ def move_func(source_dir,move_dir,item_list):
             sleep(1)
             console.log(f"{task} Complete")
 
+
 def screen_clean():
     if name == 'nt':
         _ = system('cls')
     else:
         _ = system('clear')
+
 
 def userinput(list_for_input):
 
@@ -118,6 +129,7 @@ def userinput(list_for_input):
         print("Invalid input {}".format(input_type))
         input_type = input("Enter your choice : ")
     return input_type
+
 
 def auto_mode():
     result = show_file_and_directory(source_dir)
@@ -136,7 +148,7 @@ def manual_mode():
     if result:
         screen_clean()
         show_as_table(result)
-        print("Eg: image ")
+        console.print("[dim]Eg: image [/dim]")
         file_type_list = file_type_and_name.keys()
         user_selection  = userinput(file_type_list)
 
@@ -146,6 +158,7 @@ def manual_mode():
     else:
         print("There is no files or folder in "+source_dir)
 
+
 def get_file_list(file_type):
     file_list = None
     for key,values in file_type_and_name.items():
@@ -154,4 +167,9 @@ def get_file_list(file_type):
     return file_list
 
 
-mode_selection()
+def main():
+    mode_selection()
+
+
+if __name__ == "__main__":
+    main()

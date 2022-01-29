@@ -8,6 +8,7 @@ __pycache__/
 automation-folder/
 test.py
 user.py
+dev-env/
 # C extensions
 *.so
 
