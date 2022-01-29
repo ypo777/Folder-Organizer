@@ -4,22 +4,15 @@ Install requirements:
 ```
 pip install -r requirements.txt
 ```
-
+> Recommend to install in python-venv
 
 #### How it will works
-- Move Files according to Type
+- Move Files according to FileType and Folder as Directory
 - Create Folder Name With Type in Documents
 - Two Modes ( Auto & Manual Selection) 
 
-**AutoMode**
-- Move All Files 
+**Demo Video**
 
 
-https://user-images.githubusercontent.com/27544242/131988997-c87bbff7-0500-491e-9eac-44210aa056be.mov
-
-**Manual Mode**
-- You can choose which file type will be moved.
-
-https://user-images.githubusercontent.com/27544242/131989230-7be0f13c-cf81-4488-8145-4eb421afbf5e.mov
-
+https://user-images.githubusercontent.com/27544242/151648166-c46cfbc9-4e05-4aec-9315-adbd661d9aa8.mp4
 
